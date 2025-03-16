@@ -1,24 +1,21 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-// import response from '../assets/response.json';
-import ImageGallery from './ImageGallery/ImageGallery.jsx';
-import Loader from './Loader/Loader.jsx';
-import ErrorMessage from '../components/ErrorMessage/ErrorMessage.jsx';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Loader from './Loader/Loader';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
-import SearchBar from './SearchBar/SearchBar.jsx';
-import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn.jsx';
-import { findImages } from './services/api.js';
+import SearchBar from './SearchBar/SearchBar';
+import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
+import { findImages } from './services/api';
 import toast from 'react-hot-toast';
-import Notification from './Notification/Notification.jsx';
-import ImageModal from './ImageModal/ImageModal.jsx';
-
-// console.log('imageList => ', response.results);
+import Notification from './Notification/Notification';
+import ImageModal from './ImageModal/ImageModal';
 
 const defaultPerPage = 12;
 const firstPage = 1;
 
 function App() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]) as [[], (prev: object[]) => void];
   const [page, setPage] = useState(firstPage);
   const [perPage, setPerPage] = useState(defaultPerPage);
   const [query, setQuery] = useState('');
@@ -29,11 +26,11 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentImageItem, setCurrentImageItem] = useState({});
 
-  const handleSubmit = e => {
-    // console.log('handleSubmit is called...');
+  const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
+    console.log("HandleSubmit: e => ", e);
 
-    const newQuery = e.target.elements.search.value;
+    const newQuery = e.target?.elements.search.value;
     if (newQuery.trim() === '') {
       toast.error('Search query cannot be empty!', {
         duration: 4000,
@@ -79,7 +76,7 @@ function App() {
           setPage(firstPage);
           setQuery('');
         }
-        setImages(prev => [...prev, ...results]);
+        setImages((prev: object[]) => [...prev, ...results]);
       })
       .catch(err => {
         console.error(err);
