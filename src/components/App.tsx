@@ -10,6 +10,7 @@ import { findImages } from './services/api';
 import toast from 'react-hot-toast';
 import Notification from './Notification/Notification';
 import ImageModal from './ImageModal/ImageModal';
+import { UnsplashResponse } from './services/api.types';
 
 const defaultPerPage = 12;
 const firstPage = 1;
@@ -63,10 +64,13 @@ function App() {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (!query) return;
     setIsLoading(true);
-    findImages(query, page, perPage)
-      .then(({ data }) => {
+    findImages(query, page, perPage, abortController.signal)
+      .then((res: UnsplashResponse) => {
+        console.log(res);
+        const { data } = res;
         const { results, total_pages } = data;
         if (page === total_pages) {
           setIsLastPage(true);
@@ -85,6 +89,7 @@ function App() {
       .finally(() => {
         setIsLoading(false);
       });
+    return () => abortController.abort();
   }, [query, page, perPage]);
 
   return (
