@@ -31,8 +31,8 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent<SearchBarFormElement>) => {
     e.preventDefault();
-    console.log('event: ', e);
-    console.log('event.currentTarget: ', e.currentTarget);
+    // console.log('event: ', e);
+    // console.log('event.currentTarget: ', e.currentTarget);
     const newQuery = e.currentTarget.elements.search.value;
     if (newQuery.trim() === '') {
       toast.error('Search query cannot be empty!', {
