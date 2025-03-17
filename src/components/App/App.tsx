@@ -1,18 +1,18 @@
 import { useState, useEffect} from 'react';
 import './App.css';
-import ImageGallery from './ImageGallery/ImageGallery';
-import Loader from './Loader/Loader';
-import ErrorMessage from './ErrorMessage/ErrorMessage';
+import ImageGallery from '../ImageGallery/ImageGallery';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-import SearchBar from './SearchBar/SearchBar';
-import LoadMoreBtn from './LoadMoreBtn/LoadMoreBtn';
-import { findImages } from './services/api';
+import SearchBar from '../SearchBar/SearchBar';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
+import { findImages } from '../services/api';
 import toast from 'react-hot-toast';
-import Notification from './Notification/Notification';
-import ImageModal from './ImageModal/ImageModal';
-import { UnsplashResponse } from './services/api.types';
+import Notification from '../Notification/Notification';
+import ImageModal from '../ImageModal/ImageModal';
+import { UnsplashResponse } from '../services/api.types';
 import { ImageItem } from './App.types';
-import { SearchBarFormElement } from './SearchBar/SearchBar.types';
+import { SearchBarFormElement } from '../SearchBar/SearchBar.types';
 
 const defaultPerPage = 12;
 const firstPage = 1;

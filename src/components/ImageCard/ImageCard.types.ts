@@ -1,4 +1,4 @@
-import { ImageItem } from "../App.types";
+import { ImageItem } from "../App/App.types";
 
 export type ImageCardProps = {
   imageItem: ImageItem,

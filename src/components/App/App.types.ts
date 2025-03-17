@@ -1,4 +1,4 @@
-import { UnsplashImageItem } from "./services/api.types"
+import { UnsplashImageItem } from "../services/api.types"
 
 // export type ImageItem = {
 //     id: string,
