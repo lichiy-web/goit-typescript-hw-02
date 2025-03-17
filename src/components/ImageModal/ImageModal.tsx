@@ -7,6 +7,7 @@ import {
   PiUserCircleDuotone,
   PiGlobeDuotone,
 } from 'react-icons/pi';
+import { ImageModalProps } from './ImageModal.types';
 
 const customStyles = {
   content: {
@@ -30,22 +31,11 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const ImageModal = ({ isOpen, onCloseModal, currentImageItem }) => {
-  if (!isOpen) return;
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onCloseModal, currentImageItem }) => {
+  if (!isOpen || !currentImageItem) return;
   const { urls, alt_description, description, likes, user, color } =
     currentImageItem;
   const { name, location } = user;
-  // console.log(
-  //   urls,
-  //   alt_description,
-  //   description,
-  //   likes,
-  //   name,
-  //   bio,
-  //   location,
-  //   profile_image,
-  //   color
-  // );
 
   return (
     <Modal
@@ -55,12 +45,12 @@ const ImageModal = ({ isOpen, onCloseModal, currentImageItem }) => {
       contentLabel="Image Modal"
     >
       <figure className={css.modalImageViewer}>
-        <button className={css.modalCloseBtn} onClick={onCloseModal}>
+        <button type="button" className={css.modalCloseBtn} onClick={onCloseModal}>
           <IoMdClose />
         </button>
         <div className={css.modalImageWrap}>
           <img
-            src={urls?.full}
+            src={urls.full}
             alt={alt_description?.replace(/^\w/, m => m.toUpperCase())}
             className={css.modalImage}
             style={{ border: `2px solid ${color}` }}

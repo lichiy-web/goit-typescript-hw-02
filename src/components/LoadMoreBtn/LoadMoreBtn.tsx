@@ -1,8 +1,9 @@
 import css from './LoadMoreBtn.module.css';
+import { LoadMoreBtnProps } from './LoadMoreBtn.types';
 
-const LoadMoreBtn = ({ onLoadMore, isLoading }) => {
+const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({ onLoadMore, isLoading }) => {
   return (
-    <button className={css.loadMoreBtn} onClick={onLoadMore}>
+    <button type="button" className={css.loadMoreBtn} onClick={onLoadMore}>
       {isLoading ? 'Loading...' : 'Show more'}
     </button>
   );

@@ -9,6 +9,15 @@ type TopicSubmissions = {
     [topic: string]: TopicSubmition 
 }
 
+export type ImageUrls = {
+    raw: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3",
+    full: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=85",
+    regular: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=1080",
+    small: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=400",
+    thumb: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=200",
+    small_s3: string, //"https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1592194996308-7b43878e84a6"
+}
+
 export type UnsplashImageItem = {
                 id: string, //"ZCHj_2lJP00"
                 slug: string, //"white-and-brown-long-fur-cat-ZCHj_2lJP00",
@@ -32,14 +41,7 @@ export type UnsplashImageItem = {
                 description: string | null,
                 alt_description: string | null// "white and brown long fur cat",
                 breadcrumbs: [],
-                urls: {
-                    raw: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3",
-                    full: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=85",
-                    regular: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=1080",
-                    small: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=400",
-                    thumb: string, //"https://images.unsplash.com/photo-1592194996308-7b43878e84a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDM1Njh8MHwxfHNlYXJjaHwxfHxjYXRzfGVufDB8fHx8MTc0MjA5OTk4M3ww&ixlib=rb-4.0.3&q=80&w=200",
-                    small_s3: string, //"https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1592194996308-7b43878e84a6"
-                },
+                urls: ImageUrls,
                 links: {
                     self: string, //"https://api.unsplash.com/photos/white-and-brown-long-fur-cat-ZCHj_2lJP00",
                     html: string, //"https://unsplash.com/photos/white-and-brown-long-fur-cat-ZCHj_2lJP00",
@@ -116,3 +118,4 @@ export interface AxiosResponse extends Response {
 export interface UnsplashResponse extends AxiosResponse {
     data: UnsplashData
 }
+

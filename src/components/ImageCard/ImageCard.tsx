@@ -1,6 +1,7 @@
 import css from './ImageCard.module.css';
+import { ImageCardProps } from './ImageCard.types';
 
-const ImageCard = ({ imageItem, onImageView }) => {
+const ImageCard: React.FC<ImageCardProps> = ({ imageItem, onImageView }) => {
   const { urls, alt_description, color } = imageItem;
   return (
     <li className={css.imageCard} onClick={() => onImageView(imageItem)}>

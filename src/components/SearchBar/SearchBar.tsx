@@ -2,11 +2,12 @@ import { useState } from 'react';
 import css from './SearchBar.module.css';
 import { ImSearch } from 'react-icons/im';
 import { IoMdClose } from 'react-icons/io';
+import { SearchBarProps } from './SearchBar.types';
 
-const SearchBar = ({ onSubmit }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) => {
   const [typingQuery, setTypingQuery] = useState('');
-  const handleChange = e => {
-    // console.log('handleChange is called...');
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTypingQuery(e.target.value);
   };
   const resetTypingQuery = () => {

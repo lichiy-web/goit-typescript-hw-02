@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 import './App.css';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Loader from './Loader/Loader';
@@ -11,12 +11,14 @@ import toast from 'react-hot-toast';
 import Notification from './Notification/Notification';
 import ImageModal from './ImageModal/ImageModal';
 import { UnsplashResponse } from './services/api.types';
+import { ImageItem } from './App.types';
+import { SearchBarFormElement } from './SearchBar/SearchBar.types';
 
 const defaultPerPage = 12;
 const firstPage = 1;
 
 function App() {
-  const [images, setImages] = useState([]) as [[], (prev: object[]) => void];
+  const [images, setImages] = useState<ImageItem[] | []>([]);
   const [page, setPage] = useState(firstPage);
   const [perPage, setPerPage] = useState(defaultPerPage);
   const [query, setQuery] = useState('');
@@ -25,13 +27,13 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [currentImageItem, setCurrentImageItem] = useState({});
+  const [currentImageItem, setCurrentImageItem] = useState<ImageItem | null>(null);
 
-  const handleSubmit = (e: SubmitEvent) => {
+  const handleSubmit = (e: React.FormEvent<SearchBarFormElement>) => {
     e.preventDefault();
-    console.log("HandleSubmit: e => ", e);
-
-    const newQuery = e.target?.elements.search.value;
+    console.log('event: ', e);
+    console.log('event.currentTarget: ', e.currentTarget);
+    const newQuery = e.currentTarget.elements.search.value;
     if (newQuery.trim() === '') {
       toast.error('Search query cannot be empty!', {
         duration: 4000,
@@ -53,13 +55,13 @@ function App() {
     setPage(prev => prev + 1);
   };
 
-  const handleOpenModal = newImageItem => {
+  const handleOpenModal = (newImageItem: ImageItem) => {
     setCurrentImageItem(newImageItem);
     setModalIsOpen(true);
   };
 
   const handleCloseModal = () => {
-    setCurrentImageItem({});
+    setCurrentImageItem(null);
     setModalIsOpen(false);
   };
 
@@ -68,9 +70,7 @@ function App() {
     if (!query) return;
     setIsLoading(true);
     findImages(query, page, perPage, abortController.signal)
-      .then((res: UnsplashResponse) => {
-        console.log(res);
-        const { data } = res;
+      .then(({ data }: UnsplashResponse ) => {
         const { results, total_pages } = data;
         if (page === total_pages) {
           setIsLastPage(true);
@@ -80,9 +80,9 @@ function App() {
           setPage(firstPage);
           setQuery('');
         }
-        setImages((prev: object[]) => [...prev, ...results]);
+        setImages((prev) => [...prev, ...results]);
       })
-      .catch(err => {
+      .catch( (err: Error): void => {
         console.error(err);
         setIsError(true);
       })
